@@ -1,15 +1,53 @@
 <script setup lang="ts">
 import * as z from 'zod/v4'
-import type { FormSubmitEvent } from '@nuxt/ui'
+import type { FormSubmitEvent, RadioGroupItem } from '@nuxt/ui'
+
+const workRequiredOptions = ref<RadioGroupItem[]>([
+  {
+    label: 'Cat → Back',
+    value: 'catBack',
+    description: 'From the catalytic converter to the tailpipe.'
+  },
+  {
+    label: 'Manifold → Back',
+    value: 'maniBack',
+    description: 'From the manifold to the tailpipe.'
+  },
+  {
+    label: 'Back-Box Only',
+    value: 'backBoxOnly',
+    description: 'Replacement or upgrade of the rear silencer.'
+  },
+  {
+    label: 'Tailpipes Only',
+    value: 'tailpipesOnly',
+    description: 'Just the visible tailpipe section.'
+  },
+  {
+    label: 'Full System',
+    value: 'fullSystem',
+    description: 'Complete exhaust system replacement.'
+  },
+  {
+    label: 'Full System with Remap',
+    value: 'fullSystemWithRemap',
+    description: 'Exhaust replacement plus engine remapping for performance.'
+  },
+  {
+    label: 'Other (please specify in notes)',
+    value: 'other',
+    description: 'Any other specific exhaust work required.'
+  }
+])
 
 const schema = z.object({
-  name: z.string('Name is required').nonempty('Name is required'),  
+  name: z.string('Name is required').nonempty('Name is required'),
   email: z.email('Invalid email'),
   telephone: z.string().optional(),
   makeModel: z.string().optional(),
   registration: z.string().optional(),
   postcode: z.string().optional(),
-  workRequired: z.enum(['Cat-Back', 'Mani-Back', 'Back-Box Only', 'Tailpipes Only', 'Full System', 'Full System with Remap', 'Other (please specify in notes)']).optional(),
+  workRequired: z.enum(['catBack', 'maniBack', 'backBoxOnly', 'tailpipesOnly', 'fullSystem', 'fullSystemWithRemap', 'other']).optional(),
   notes: z.string().optional(),
   contactPreference: z.enum(['Email', 'Phone', 'SMS']).optional()
 })
@@ -36,67 +74,135 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-    
-  <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit" netlify>
+  <UForm
+    id="exhaustContact"
+    :schema="schema"
+    :state="state"
+    class="space-y-4"
+    netlify
+    @submit="onSubmit"
+  >
     <UPageColumns>
-    <UFormField label="Name" name="name">
-      <UInput v-model="state.name" />
-    </UFormField>
+      <UFormField
+        label="Name"
+        name="name"
+      >
+        <UInput
+          v-model="state.name"
+          variant="subtle"
+          color="primary"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UFormField label="Email" name="email">
-      <UInput v-model="state.email" />
-    </UFormField>
+      <UFormField
+        label="Email"
+        name="email"
+      >
+        <UInput
+          v-model="state.email"
+          variant="subtle"
+          color="primary"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UFormField label="Telephone number" name="telephone">
-      <UInput v-model="state.telephone" />
-    </UFormField>
+      <UFormField
+        label="Telephone number"
+        name="telephone"
+      >
+        <UInput
+          v-model="state.telephone"
+          variant="subtle"
+          color="primary"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UFormField label="Car make & model" name="makeModel">
-      <UInput v-model="state.makeModel" />
-    </UFormField>
+      <UFormField
+        label="Car make & model"
+        name="makeModel"
+      >
+        <UInput
+          v-model="state.makeModel"
+          variant="subtle"
+          color="primary"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UFormField label="Car registration" name="registration">
-      <UInput v-model="state.registration" />
-    </UFormField>
+      <UFormField
+        label="Car registration"
+        name="registration"
+      >
+        <UInput
+          v-model="state.registration"
+          variant="subtle"
+          color="primary"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UFormField label="Postcode" name="postcode">
-      <UInput v-model="state.postcode" />
-    </UFormField>
+      <UFormField
+        label="Postcode"
+        name="postcode"
+      >
+        <UInput
+          v-model="state.postcode"
+          variant="subtle"
+          color="primary"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UFormField label="Work required" name="workRequired" >
-      <USelect
-        v-model="state.workRequired"
-        :items="[
-          'Cat-Back',
-          'Mani-Back',
-          'Back-Box Only',
-          'Tailpipes Only',
-          'Full System',
-          'Full System with Remap',
-          'Other (please specify in notes)'
-        ]"
-        placeholder="Work required"
-        class="w-48"
-      />
-    </UFormField>
+      <UFormField
+        label="Work required"
+        name="workRequired"
+      >
+        <URadioGroup
+          v-model="state.workRequired"
+          variant="table"
+          :items="workRequiredOptions"
+          color="primary"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UFormField label="Preferred contact method" name="contactPreference" >
-      <USelect
-        v-model="state.contactPreference"
-        :items="['Email', 'Phone', 'SMS']"
-        placeholder="Contact preference"
-        class="w-48"
-      />
-    </UFormField>
+      <UFormField
+        label="Preferred contact method"
+        name="contactPreference"
+        variant="subtle"
+        color="primary"
+        class="w-full"
+      >
+        <URadioGroup
+          v-model="state.contactPreference"
+          variant="table"
+          :items="['Email', 'Phone', 'SMS']"
+          color="primary"
+        />
+      </UFormField>
 
-    <UFormField label="Additional notes" name="notes">
-      <UTextarea v-model="state.notes" :rows="4" />
-    </UFormField>
+      <UFormField
+        label="Additional notes"
+        name="notes"
+      >
+        <UTextarea
+          v-model="state.notes"
+          :rows="4"
+          placeholder="Your message or extra notes"
+          variant="subtle"
+          color="primary"
+          class="w-full"
+        />
+      </UFormField>
 
-    <UButton type="submit">
-      Submit
-    </UButton>
+      <UButton
+        type="submit"
+        color="primary"
+      >
+        Submit
+      </UButton>
     </UPageColumns>
   </UForm>
 </template>
-
