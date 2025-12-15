@@ -5,21 +5,21 @@ const { activeHeadings, updateHeadings } = useScrollspy()
 const items = computed(() => [{
   label: 'Features',
   to: '#features',
-  active: activeHeadings.value.includes('features') && !activeHeadings.value.includes('pricing')
+  active: activeHeadings.value.includes('features') && !activeHeadings.value.includes('about')
 }, {
-  label: 'Pricing',
-  to: '#pricing',
-  active: activeHeadings.value.includes('pricing')
+  label: 'About',
+  to: '#about',
+  active: activeHeadings.value.includes('about')
 }, {
   label: 'Testimonials',
   to: '#testimonials',
-  active: activeHeadings.value.includes('testimonials') && !activeHeadings.value.includes('pricing')
+  active: activeHeadings.value.includes('testimonials') && !activeHeadings.value.includes('about')
 }])
 
 nuxtApp.hooks.hookOnce('page:finish', () => {
   updateHeadings([
     document.querySelector('#features'),
-    document.querySelector('#pricing'),
+    document.querySelector('#about'),
     document.querySelector('#testimonials')
   ].filter(Boolean) as Element[])
 })
@@ -31,8 +31,6 @@ nuxtApp.hooks.hookOnce('page:finish', () => {
       <NuxtLink to="/">
         <AppLogo class="w-auto h-6 shrink-0" />
       </NuxtLink>
-
-      <TemplateMenu />
     </template>
 
     <template #right>
@@ -43,7 +41,8 @@ nuxtApp.hooks.hookOnce('page:finish', () => {
       />
 
       <UButton
-        label="Download App"
+        label="03300 430467"
+        href="tel:+443300430467"
         variant="subtle"
         class="hidden lg:block"
       />
