@@ -5,4 +5,28 @@
 
 @theme {
   --font-sans: 'Public Sans', sans-serif;
+
+  --color-ruby-50: oklch(0.958 0.017 21.9);
+  --color-ruby-100: oklch(0.918 0.037 22.01);
+  --color-ruby-200: oklch(0.837 0.079 22.76);
+  --color-ruby-300: oklch(0.749 0.135 22.99);
+  --color-ruby-400: oklch(0.67 0.193 25.28);
+  --color-ruby-500: oklch(0.587 0.219 26.93);
+  --color-ruby-600: oklch(0.495 0.179 28.34);
+  --color-ruby-700: oklch(0.404 0.14 29.89);
+  --color-ruby-800: oklch(0.323 0.108 31.04);
+  --color-ruby-900: oklch(0.232 0.074 32.75);
+  --color-ruby-950: oklch(0.183 0.057 33.83);
+
+  --color-primary-50: var(--color-ruby-50);
+  --color-primary-100: var(--color-ruby-100);
+  --color-primary-200: var(--color-ruby-200);
+  --color-primary-300: var(--color-ruby-300);
+  --color-primary-400: var(--color-ruby-400);
+  --color-primary-500: var(--color-ruby-500);   
+  --color-primary-600: var(--color-ruby-600);
+  --color-primary-700: var(--color-ruby-700);
+  --color-primary-800: var(--color-ruby-800);
+  --color-primary-900: var(--color-ruby-900);
+  --color-primary-950: var(--color-ruby-950);
 }
