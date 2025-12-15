@@ -11,7 +11,7 @@ const schema = z.object({
   postcode: z.string().optional(),
   workRequired: z.enum(['Cat-Back', 'Mani-Back', 'Back-Box Only', 'Tailpipes Only', 'Full System', 'Full System with Remap', 'Other (please specify in notes)']).optional(),
   notes: z.string().optional(),
-  contactPreference: z.enum(['email', 'phone', 'sms']).optional()
+  contactPreference: z.enum(['Email', 'Phone', 'SMS']).optional()
 })
 
 type Schema = z.output<typeof schema>
