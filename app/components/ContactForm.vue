@@ -78,10 +78,15 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     id="exhaustContact"
     :schema="schema"
     :state="state"
-    class="space-y-4"
-    netlify
+    data-netlify="true"
+    data-netlify-honeypot="bot-field"
     @submit="onSubmit"
   >
+    <input
+      type="hidden"
+      name="form-name"
+      value="exhaustContact"
+    >
     <UPageColumns>
       <UFormField
         label="Name"
