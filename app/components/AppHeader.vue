@@ -58,7 +58,8 @@ nuxtApp.hooks.hookOnce('page:finish', () => {
       />
       <UButton
         class="mt-4"
-        label="Download App"
+        label="03300 430467"
+        href="tel:+443300430467"
         variant="subtle"
         block
       />
