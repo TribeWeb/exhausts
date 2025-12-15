@@ -148,7 +148,7 @@ useSeoMeta({
     </UPageSection>
 
     <UPageSection
-      id="pricing"
+      id="about"
       class="mb-32 overflow-hidden"
       :title="page.pricing.title"
       :description="page.pricing.description"
