@@ -103,7 +103,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 <template>
   <form
-    action="/simple-netlify-form"
+    action="/"
     method="post"
     enctype="application/x-www-form-urlencoded"
     data-netlify="true"
@@ -162,9 +162,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         >
       </label>
     </fieldset>
-    <button type="submit">
+    <UButton type="submit">
       Submit
-    </button>
+    </UButton>
   </form>
   <UForm
     id="exhaustContact"
