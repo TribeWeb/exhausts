@@ -11,6 +11,41 @@ const frameworks = ref([
   'Electron'
 ])
 
+const formEntries = reactive({
+  name: null,
+  role: 'default',
+  vote: null
+})
+
+const setVote = e => formEntries.vote = e.target.value
+
+// Form Submission
+const formRef = ref(null)
+const formResponse = ref('')
+
+const encode = (data) => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&')
+}
+
+const handleSubmit = (e) => {
+  const formData = {
+    'occupation': formEntries.role,
+    'framework': formEntries.vote,
+    'name': formEntries.name,
+    'form-name': 'framework-votes-ajax'
+  }
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: encode(formData)
+  })
+    .then(() => formResponse.value = 'Thank you for your vote.')
+    .catch(e => formResponse.value = e.message)
+}
+
 const workRequiredOptions = ref<RadioGroupItem[]>([
   {
     label: 'Cat → Back',
@@ -103,16 +138,15 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 <template>
   <form
-    action="/"
-    method="post"
-    enctype="application/x-www-form-urlencoded"
+    ref="formRef"
     data-netlify="true"
-    name="framework-votes"
+    name="framework-votes-ajax"
+    @submit.prevent="handleSubmit"
   >
     <input
       type="hidden"
       name="form-name"
-      value="framework-votes"
+      value="framework-votes-ajax"
     >
     <fieldset>
       <label for="name">
@@ -121,6 +155,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         </p>
         <input
           id="name"
+          v-model="formEntries.name"
           type="text"
           name="name"
           required
@@ -132,12 +167,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         </p>
         <select
           id="occupation"
+          v-model="formEntries.role"
           name="occupation"
           required
         >
           <option
             disabled
-            selected
+            value="default"
           >Select...</option>
           <option value="front-end-developer">Front-end Developer</option>
           <option value="full-stack-developer">Full-stack Developer</option>
@@ -150,7 +186,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <label
         v-for="framework of frameworks"
         :key="framework"
-        :for="framework"
+        for="framework"
       >
         <p>{{ framework }}</p>
         <input
@@ -159,12 +195,19 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           name="framework"
           :value="framework"
           required
+          @change="setVote"
         >
       </label>
     </fieldset>
-    <UButton type="submit">
+    <button type="submit">
       Submit
-    </UButton>
+    </button>
+    <p
+      v-if="formResponse"
+      class="response-message"
+    >
+      {{ formResponse }}
+    </p>
   </form>
   <UForm
     id="exhaustContact"
