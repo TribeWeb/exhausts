@@ -2,6 +2,15 @@
 import * as z from 'zod/v4'
 import type { FormSubmitEvent, RadioGroupItem } from '@nuxt/ui'
 
+const frameworks = ref([
+  'React',
+  'VueJS',
+  'Angular',
+  'Svelte',
+  'Ember',
+  'Electron'
+])
+
 const workRequiredOptions = ref<RadioGroupItem[]>([
   {
     label: 'Cat → Back',
@@ -93,6 +102,70 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
+  <form
+    action="/simple-netlify-form"
+    method="post"
+    enctype="application/x-www-form-urlencoded"
+    data-netlify="true"
+    name="framework-votes"
+  >
+    <input
+      type="hidden"
+      name="form-name"
+      value="framework-votes"
+    >
+    <fieldset>
+      <label for="name">
+        <p>
+          Your Name:
+        </p>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          required
+        >
+      </label>
+      <label for="name">
+        <p>
+          Your Role:
+        </p>
+        <select
+          id="occupation"
+          name="occupation"
+          required
+        >
+          <option
+            disabled
+            selected
+          >Select...</option>
+          <option value="front-end-developer">Front-end Developer</option>
+          <option value="full-stack-developer">Full-stack Developer</option>
+          <option value="web-designer">Web Designer</option>
+          <option value="project-manager">Project Manager</option>
+        </select>
+      </label>
+    </fieldset>
+    <fieldset>
+      <label
+        v-for="framework of frameworks"
+        :key="framework"
+        :for="framework"
+      >
+        <p>{{ framework }}</p>
+        <input
+          :id="framework"
+          type="radio"
+          name="framework"
+          :value="framework"
+          required
+        >
+      </label>
+    </fieldset>
+    <button type="submit">
+      Submit
+    </button>
+  </form>
   <UForm
     id="exhaustContact"
     :schema="schema"
