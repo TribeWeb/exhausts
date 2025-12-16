@@ -45,7 +45,7 @@ useSeoMeta({
       </template>
     </UPageHero>
     <UPageCard
-      Title="Get in touch with us using the form below and we'll get back to you as soon as possible."
+      title="Get in touch with us using the form below and we'll get back to you as soon as possible."
     >
       <ContactForm />
     </UPageCard>

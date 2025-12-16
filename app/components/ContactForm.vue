@@ -68,6 +68,17 @@ const state = reactive<Partial<Schema>>({
 
 const toast = useToast()
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  const myForm = event.data
+  // const formData = new FormData(myForm);
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(myForm).toString()
+  })
+    .then(() => console.log('Form successfully submitted'))
+    .catch(error => alert(error))
+
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
   console.log(event.data)
 }
@@ -80,7 +91,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     :state="state"
     data-netlify="true"
     data-netlify-honeypot="bot-field"
-    @submit="onSubmit"
+    @submit.prevent="onSubmit"
   >
     <input
       type="hidden"
