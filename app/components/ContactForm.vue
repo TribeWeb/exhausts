@@ -79,7 +79,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   //     .then(() => console.log('Form successfully submitted'))
   //     .catch(error => alert(error))
 
-  const bob = await $fetch('/', {
+  const bob = await $fetch('/exhaustContact', {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     method: 'POST',
     body: event.data
