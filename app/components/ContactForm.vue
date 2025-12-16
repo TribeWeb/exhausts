@@ -68,19 +68,24 @@ const state = reactive<Partial<Schema>>({
 
 const toast = useToast()
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  const myForm = event.data
-  // const formData = new FormData(myForm);
+//   const myForm = event.target
+//   const formData = new FormData(myForm)
 
-  fetch('/', {
-    method: 'POST',
+  //   fetch('/', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  //     body: new URLSearchParams(formData).toString()
+  //   })
+  //     .then(() => console.log('Form successfully submitted'))
+  //     .catch(error => alert(error))
+
+  const bob = await $fetch('/', {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(myForm).toString()
+    method: 'POST',
+    body: event.data
   })
-    .then(() => console.log('Form successfully submitted'))
-    .catch(error => alert(error))
-
   toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
-  console.log(event.data)
+  console.log(event.data, bob)
 }
 </script>
 
