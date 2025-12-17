@@ -95,7 +95,7 @@ async function onSubmit() {
 
 <template>
   <!-- <pre>{{ plate }}</pre> -->
-  <pre>{{ data }}</pre>
+  <!-- <pre>{{ data }}</pre> -->
   <UForm
     id="exhaustContact"
     :schema="schema"
