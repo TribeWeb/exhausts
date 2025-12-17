@@ -85,31 +85,31 @@ const workRequiredOptions = ref<RadioGroupItem[]>([
 ])
 
 const schema = z.object({
-  'name': z.string('Name is required').nonempty('Name is required'),
-  'email': z.email('Invalid email'),
-  'telephone': z.string().optional(),
-  'makeModel': z.string().optional(),
-  'registration': z.string().optional(),
-  'postcode': z.string().optional(),
-  'workRequired': z.enum(['catBack', 'maniBack', 'backBoxOnly', 'tailpipesOnly', 'fullSystem', 'fullSystemWithRemap', 'other']).optional(),
-  'notes': z.string().optional(),
-  'contactPreference': z.enum(['Email', 'Phone', 'SMS']).optional(),
-  'form-name': z.literal('exhaustContact')
+  name: z.string('Name is required').nonempty('Name is required'),
+  email: z.email('Invalid email'),
+  telephone: z.string().optional(),
+  makeModel: z.string().optional(),
+  registration: z.string().optional(),
+  postcode: z.string().optional(),
+  workRequired: z.enum(['catBack', 'maniBack', 'backBoxOnly', 'tailpipesOnly', 'fullSystem', 'fullSystemWithRemap', 'other']).optional(),
+  notes: z.string().optional(),
+  contactPreference: z.enum(['Email', 'Phone', 'SMS']).optional()
+  // 'form-name': z.literal('exhaustContact')
 })
 
 type Schema = z.output<typeof schema>
 
 const state = reactive<Partial<Schema>>({
-  'name': undefined,
-  'email': undefined,
-  'telephone': undefined,
-  'makeModel': undefined,
-  'registration': undefined,
-  'postcode': undefined,
-  'workRequired': undefined,
-  'notes': undefined,
-  'contactPreference': undefined,
-  'form-name': 'exhaustContact'
+  name: undefined,
+  email: undefined,
+  telephone: undefined,
+  makeModel: undefined,
+  registration: undefined,
+  postcode: undefined,
+  workRequired: undefined,
+  notes: undefined,
+  contactPreference: undefined
+  // 'form-name': 'exhaustContact'
 })
 
 const toast = useToast()
