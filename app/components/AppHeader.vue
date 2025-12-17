@@ -29,7 +29,8 @@ nuxtApp.hooks.hookOnce('page:finish', () => {
   <UHeader>
     <template #left>
       <NuxtLink to="/">
-        <AppLogo class="w-auto h-6 shrink-0" />
+        <!-- <AppLogo class="w-auto h-6 shrink-0" /> -->
+        <span class="w-auto h-6 shrink-0">DeMarco Exhausts</span>
       </NuxtLink>
     </template>
 
