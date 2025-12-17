@@ -79,7 +79,7 @@ const toast = useToast()
 async function onSubmit() {
   const stateWithFormName = Object.assign({ 'form-name': 'exhaustContact' }, state)
   const stateStringified = new URLSearchParams(stateWithFormName).toString()
-  const query = stateStringified.replaceAll('undefined', '')
+  const query = stateStringified.replaceAll('undefined', '-')
 
   await $fetch('/', {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
