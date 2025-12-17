@@ -1,50 +1,6 @@
 <script setup lang="ts">
 import * as z from 'zod/v4'
-import type { FormSubmitEvent, RadioGroupItem } from '@nuxt/ui'
-
-const frameworks = ref([
-  'React',
-  'VueJS',
-  'Angular',
-  'Svelte',
-  'Ember',
-  'Electron'
-])
-
-const formEntries = reactive({
-  name: null,
-  role: 'default',
-  vote: null
-})
-
-const setVote = e => formEntries.vote = e.target.value
-
-// Form Submission
-const formRef = ref(null)
-const formResponse = ref('')
-
-const encode = (data) => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
-}
-
-const handleSubmit = (e) => {
-  const formData = {
-    'occupation': formEntries.role,
-    'framework': formEntries.vote,
-    'name': formEntries.name,
-    'form-name': 'framework-votes-ajax'
-  }
-
-  fetch('/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: encode(formData)
-  })
-    .then(() => formResponse.value = 'Thank you for your vote.')
-    .catch(e => formResponse.value = e.message)
-}
+import type { RadioGroupItem } from '@nuxt/ui'
 
 const workRequiredOptions = ref<RadioGroupItem[]>([
   {
@@ -86,15 +42,14 @@ const workRequiredOptions = ref<RadioGroupItem[]>([
 
 const schema = z.object({
   name: z.string('Name is required').nonempty('Name is required'),
-  email: z.email('Invalid email'),
+  email: z.email('Invalid email').nonempty('Email is required'),
   telephone: z.string().optional(),
   makeModel: z.string().optional(),
   registration: z.string().optional(),
   postcode: z.string().optional(),
-  workRequired: z.enum(['catBack', 'maniBack', 'backBoxOnly', 'tailpipesOnly', 'fullSystem', 'fullSystemWithRemap', 'other']).optional(),
+  workRequired: z.enum(['catBack', 'maniBack', 'backBoxOnly', 'tailpipesOnly', 'fullSystem', 'fullSystemWithRemap', 'other']),
   notes: z.string().optional(),
   contactPreference: z.enum(['Email', 'Phone', 'SMS']).optional()
-  // 'form-name': z.literal('exhaustContact')
 })
 
 type Schema = z.output<typeof schema>
@@ -109,20 +64,20 @@ const state = reactive<Partial<Schema>>({
   workRequired: undefined,
   notes: undefined,
   contactPreference: undefined
-  // 'form-name': 'exhaustContact'
 })
 
 const toast = useToast()
-async function onSubmit(event: FormSubmitEvent<Schema>) {
-  // const formData = new FormData(event.target as HTMLFormElement)
-  console.log(new URLSearchParams(state).toString())
+async function onSubmit() {
+  const stateStringified = new URLSearchParams(state).toString()
+  const stateWithDefaults = stateStringified.replace('undefined', '')
+  const query = Object.assign({ 'form-name': 'exhaustContact' }, stateWithDefaults)
 
   await $fetch('/', {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     method: 'POST',
-    body: new URLSearchParams(state).toString()
+    body: query
   }).then(() =>
-    toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
+    toast.add({ title: 'Success', description: 'Thank you. We\'ll be in touch soon', color: 'success' })
   ).catch(error =>
     toast.add({ title: 'Error', description: error.toString(), color: 'error' })
   )
@@ -130,78 +85,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <form
-    ref="formRef"
-    data-netlify="true"
-    name="framework-votes-ajax"
-    @submit.prevent="handleSubmit"
-  >
-    <input
-      type="hidden"
-      name="form-name"
-      value="framework-votes-ajax"
-    >
-    <fieldset>
-      <label for="name">
-        <p>
-          Your Name:
-        </p>
-        <input
-          id="name"
-          v-model="formEntries.name"
-          type="text"
-          name="name"
-          required
-        >
-      </label>
-      <label for="name">
-        <p>
-          Your Role:
-        </p>
-        <select
-          id="occupation"
-          v-model="formEntries.role"
-          name="occupation"
-          required
-        >
-          <option
-            disabled
-            value="default"
-          >Select...</option>
-          <option value="front-end-developer">Front-end Developer</option>
-          <option value="full-stack-developer">Full-stack Developer</option>
-          <option value="web-designer">Web Designer</option>
-          <option value="project-manager">Project Manager</option>
-        </select>
-      </label>
-    </fieldset>
-    <fieldset>
-      <label
-        v-for="framework of frameworks"
-        :key="framework"
-        for="framework"
-      >
-        <p>{{ framework }}</p>
-        <input
-          :id="framework"
-          type="radio"
-          name="framework"
-          :value="framework"
-          required
-          @change="setVote"
-        >
-      </label>
-    </fieldset>
-    <button type="submit">
-      Submit
-    </button>
-    <p
-      v-if="formResponse"
-      class="response-message"
-    >
-      {{ formResponse }}
-    </p>
-  </form>
   <UForm
     id="exhaustContact"
     :schema="schema"
