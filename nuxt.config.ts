@@ -4,7 +4,9 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/ui',
-    '@nuxt/content'
+    '@nuxt/content',
+    '@vueuse/nuxt',
+    'nuxt-studio'
   ],
 
   devtools: {
@@ -35,6 +37,16 @@ export default defineNuxtConfig({
         commaDangle: 'never',
         braceStyle: '1tbs'
       }
+    }
+  },
+
+  studio: {
+    // Git repository configuration (owner and repo are required)
+    repository: {
+      provider: 'github', // 'github' or 'gitlab'
+      owner: 'tribeweb', // your GitHub/GitLab username or organization
+      repo: 'exhausts', // your repository name
+      branch: 'main' // the branch to commit to (default: 'main')
     }
   }
 })
