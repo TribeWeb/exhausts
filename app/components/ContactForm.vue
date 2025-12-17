@@ -66,11 +66,20 @@ const state = reactive<Partial<Schema>>({
   contactPreference: undefined
 })
 
+// const registration = computed(() => state.registration || '')
+// const updatedRegistration = refDebounced(registration, 1000)
+
+// const plate = computed(() => updatedRegistration.value.toString().toUpperCase().replace(/\s+/g, ''))
+
+// const { data, status, error, refresh, clear } = await useFetch(() => `/api/dvla/${plate.value}`, {
+//   pick: ['make', 'monthOfFirstRegistration', 'yearOfManufacture', 'engineCapacity', 'fuelType']
+// })
+
 const toast = useToast()
 async function onSubmit() {
-  const stateStringified = new URLSearchParams(state).toString()
-  const stateWithDefaults = stateStringified.replace('undefined', '')
-  const query = Object.assign({ 'form-name': 'exhaustContact' }, stateWithDefaults)
+  const stateWithFormName = Object.assign({ 'form-name': 'exhaustContact' }, state)
+  const stateStringified = new URLSearchParams(stateWithFormName).toString()
+  const query = stateStringified.replaceAll('undefined', '')
 
   await $fetch('/', {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -85,6 +94,8 @@ async function onSubmit() {
 </script>
 
 <template>
+  <!-- <pre>{{ plate }}</pre> -->
+  <pre>{{ data }}</pre>
   <UForm
     id="exhaustContact"
     :schema="schema"
