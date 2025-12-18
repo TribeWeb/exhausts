@@ -35,7 +35,15 @@ nuxtApp.hooks.hookOnce('page:finish', () => {
     <template #left>
       <NuxtLink to="/">
         <!-- <AppLogo class="w-auto h-6 shrink-0" /> -->
-        <span class="w-auto h-6 shrink-0">DeMarco Exhausts</span>
+        <!-- <span class="w-auto h-6 shrink-0">DeMarco Exhausts</span> -->
+        <div class="flex flex-row gap-1.5">
+          <div class="flex flex-col font-feature font-bold text-3xl leading-none text-primary">
+            DeMarco
+            <div class="text-default text-xs font-light font-sans tracking-[0.56em]">
+              EXHAUSTS
+            </div>
+          </div>
+        </div>
       </NuxtLink>
     </template>
 

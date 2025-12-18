@@ -1,4 +1,4 @@
-title: DeMarco Exhausts
+title: "[DeMarco]{.text-primary .font-feature}  Exhausts"
 cta:
   title: Ready to build an amazing landing page?
   description: Join thousands of developers building with Nuxt and Nuxt UI. Get this template and start shipping today.
@@ -12,7 +12,7 @@ cta:
       target: _blank
       variant: subtle
       icon: i-simple-icons-github
-description: Custom made TIG welded stainless steel exhaust systems. Designed for peak performance, crafted for maximum impact.
+description: Custom made TIG welded stainless steel exhaust systems. Designed for performance, crafted for impact.
 features:
   title: Take control of your [productivity]{.text-primary}
   description: Make every coding session count with smart analytics and workflow optimization.
@@ -93,8 +93,8 @@ section:
   title: "[Revolutionize]{.text-primary} your coding experience"
   description: Transform your development workflow with AI-powered insights and personalized productivity optimization.
   images:
-    mobile: /images/tailpipes.jpeg
-    desktop: /images/tailpipes.jpeg
+    mobile: /images/tailpipes.svg
+    desktop: /images/tailpipes.svg
   features:
     - title: Optimize your focus time
       description: Let AI identify your peak coding hours and adapt to your natural rhythm. Focus on what matters most - writing great code, while our system optimizes your productivity patterns.
