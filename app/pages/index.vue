@@ -43,12 +43,8 @@ useSeoMeta({
           unwrap="p"
         />
       </template>
+      <LazyStarsBg />
     </UPageHero>
-    <UPageCard
-      title="Get in touch with us using the form below and we'll get back to you as soon as possible."
-    >
-      <ContactForm />
-    </UPageCard>
 
     <UPageSection
       :description="page.section.description"
@@ -228,6 +224,13 @@ useSeoMeta({
     </UPageSection>
 
     <USeparator />
+    <UPageSection
+      id="quote"
+      title="Get a quote"
+      description="Send us a few details and we'll get back to you as soon as possible."
+    >
+      <ContactForm />
+    </UPageSection>
 
     <UPageCTA
       v-bind="page.cta"

@@ -14,13 +14,18 @@ const items = computed(() => [{
   label: 'Testimonials',
   to: '#testimonials',
   active: activeHeadings.value.includes('testimonials') && !activeHeadings.value.includes('about')
+}, {
+  label: 'Quote',
+  to: '#quote',
+  active: activeHeadings.value.includes('quote') && !activeHeadings.value.includes('about')
 }])
 
 nuxtApp.hooks.hookOnce('page:finish', () => {
   updateHeadings([
     document.querySelector('#features'),
     document.querySelector('#about'),
-    document.querySelector('#testimonials')
+    document.querySelector('#testimonials'),
+    document.querySelector('#quote')
   ].filter(Boolean) as Element[])
 })
 </script>

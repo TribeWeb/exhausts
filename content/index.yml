@@ -49,20 +49,13 @@ features:
         leading: bg-accented/50 p-2 rounded-md border border-muted border-dashed
 hero:
   links:
-    - label: Get started
+    - label: Get a quote
       icon: i-lucide-arrow-right
       trailing: true
       color: primary
-      to: https://ui.nuxt.com/docs/getting-started/installation/nuxt
-      target: _blank
+      to: "#quote"
+      target: ""
       size: xl
-    - label: Clone on GitHub
-      icon: i-simple-icons-github
-      size: xl
-      color: neutral
-      variant: outline
-      to: https://github.com/nuxt-ui-templates/landing
-      target: _blank
 pricing:
   title: Choose your [productivity]{.text-primary} path
   description: Unlock AI-powered coding efficiency with our flexible plans. Whether you're a solo developer or part of a team, we have the perfect toolset to maximize your development workflow.
@@ -100,8 +93,8 @@ section:
   title: "[Revolutionize]{.text-primary} your coding experience"
   description: Transform your development workflow with AI-powered insights and personalized productivity optimization.
   images:
-    mobile: /images/macbook-mobile.svg
-    desktop: /images/macbook.svg
+    mobile: /images/tailpipes.jpeg
+    desktop: /images/tailpipes.jpeg
   features:
     - title: Optimize your focus time
       description: Let AI identify your peak coding hours and adapt to your natural rhythm. Focus on what matters most - writing great code, while our system optimizes your productivity patterns.
