@@ -23,7 +23,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     dvlaApiKeyTest: '',
-    dvlaApiKeyProd: '' // Default to an empty string, automatically set at runtime using process.env.NUXT_API_KEY
+    dvlaApiKeyProd: '', // Default to an empty string, automatically set at runtime using process.env.NUXT_API_KEY
+    studioGithubClientId: '',
+    studioGithubClientSecret: ''
   },
 
   compatibilityDate: '2025-01-15',
