@@ -2,6 +2,17 @@
 const nuxtApp = useNuxtApp()
 const { activeHeadings, updateHeadings } = useScrollspy()
 
+const colorMode = useColorMode()
+
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set(_isDark) {
+    colorMode.preference = _isDark ? 'dark' : 'light'
+  }
+})
+
 const items = computed(() => [{
   label: 'Features',
   to: '#features',
@@ -15,9 +26,9 @@ const items = computed(() => [{
   to: '#testimonials',
   active: activeHeadings.value.includes('testimonials') && !activeHeadings.value.includes('about')
 }, {
-  label: 'Quote',
-  to: '#quote',
-  active: activeHeadings.value.includes('quote') && !activeHeadings.value.includes('about')
+  label: 'Contact',
+  to: '#contact',
+  active: activeHeadings.value.includes('contact') && !activeHeadings.value.includes('about')
 }])
 
 nuxtApp.hooks.hookOnce('page:finish', () => {
@@ -25,7 +36,7 @@ nuxtApp.hooks.hookOnce('page:finish', () => {
     document.querySelector('#features'),
     document.querySelector('#about'),
     document.querySelector('#testimonials'),
-    document.querySelector('#quote')
+    document.querySelector('#contact')
   ].filter(Boolean) as Element[])
 })
 </script>
@@ -34,8 +45,6 @@ nuxtApp.hooks.hookOnce('page:finish', () => {
   <UHeader>
     <template #left>
       <NuxtLink to="/">
-        <!-- <AppLogo class="w-auto h-6 shrink-0" /> -->
-        <!-- <span class="w-auto h-6 shrink-0">DeMarco Exhausts</span> -->
         <div class="flex flex-row gap-1.5">
           <div class="flex flex-col font-feature font-bold text-3xl leading-none text-primary">
             DeMarco
@@ -61,7 +70,20 @@ nuxtApp.hooks.hookOnce('page:finish', () => {
         class="hidden lg:block"
       />
 
-      <UColorModeButton />
+      <!-- <UColorModeButton /> -->
+      <ClientOnly v-if="!colorMode?.forced">
+        <UButton
+          :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
+          color="neutral"
+          variant="ghost"
+          :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
+          @click="isDark = !isDark"
+        />
+
+        <template #fallback>
+          <div class="size-8" />
+        </template>
+      </ClientOnly>
     </template>
 
     <template #body>
