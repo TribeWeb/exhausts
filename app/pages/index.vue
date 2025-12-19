@@ -21,7 +21,7 @@ useSeoMeta({
       <UColorModeImage
         light="/images/light/line-1.svg"
         dark="/images/dark/line-1.svg"
-        class="absolute pointer-events-none pb-10 left-0 top-0 object-cover h-[650px]"
+        class="absolute pointer-events-none pb-10 left-0 top-0 object-cover h-162.5"
       />
     </div>
 
@@ -86,8 +86,8 @@ useSeoMeta({
       }"
       class="relative overflow-hidden"
     >
-      <div class="absolute rounded-full -left-10 top-10 size-[300px] z-10 bg-primary opacity-30 blur-[200px]" />
-      <div class="absolute rounded-full -right-10 -bottom-10 size-[300px] z-10 bg-primary opacity-30 blur-[200px]" />
+      <div class="absolute rounded-full -left-10 top-10 size-75 z-10 bg-primary opacity-30 blur-[200px]" />
+      <div class="absolute rounded-full -right-10 -bottom-10 size-75 z-10 bg-primary opacity-30 blur-[200px]" />
       <template #title>
         <MDC
           :value="page.features.title"
@@ -148,43 +148,7 @@ useSeoMeta({
       </template>
     </UPageSection>
 
-    <UPageSection
-      id="about"
-      class="mb-32 overflow-hidden"
-      :title="page.pricing.title"
-      :description="page.pricing.description"
-      :plans="page.pricing.plans"
-      :ui="{ title: 'text-left @container relative', description: 'text-left' }"
-    >
-      <template #title>
-        <MDC :value="page.pricing.title" />
-
-        <div class="hidden @min-[1120px]:block">
-          <UColorModeImage
-            light="/images/light/line-4.svg"
-            dark="/images/dark/line-4.svg"
-            class="absolute top-0 right-0 size-full transform translate-x-[60%]"
-          />
-        </div>
-      </template>
-
-      <UPricingPlans scale>
-        <UPricingPlan
-          v-for="(plan, index) in page.pricing.plans"
-          :key="index"
-          :title="plan.title"
-          :description="plan.description"
-          :price="plan.price"
-          :billing-period="plan.billing_period"
-          :billing-cycle="plan.billing_cycle"
-          :highlight="plan.highlight"
-          :scale="plan.highlight"
-          variant="soft"
-          :features="plan.features"
-          :button="plan.button"
-        />
-      </UPricingPlans>
-    </UPageSection>
+    <USeparator :ui="{ border: 'border-primary/30' }" />
 
     <UPageSection
       id="testimonials"
@@ -225,36 +189,11 @@ useSeoMeta({
 
     <USeparator />
     <UPageSection
-      id="quote"
-      title="Get a quote"
-      description="Send us a few details and we'll get back to you as soon as possible."
+      id="contact"
+      :title="page.contact.title"
+      :description="page.contact.description"
     >
       <ContactForm />
     </UPageSection>
-
-    <UPageCTA
-      v-bind="page.cta"
-      variant="naked"
-      class="overflow-hidden @container"
-    >
-      <template #title>
-        <MDC :value="page.cta.title" />
-
-        <div class="@max-[1280px]:hidden">
-          <UColorModeImage
-            light="/images/light/line-6.svg"
-            dark="/images/dark/line-6.svg"
-            class="absolute left-10 -top-10 sm:top-0 h-full"
-          />
-          <UColorModeImage
-            light="/images/light/line-7.svg"
-            dark="/images/dark/line-7.svg"
-            class="absolute right-0 bottom-0 h-full"
-          />
-        </div>
-      </template>
-
-      <LazyStarsBg />
-    </UPageCTA>
   </div>
 </template>

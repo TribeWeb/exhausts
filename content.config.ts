@@ -41,7 +41,8 @@ export const collections = {
         }),
         features: z.array(
           createBaseSchema().extend({
-            icon: z.string().editor({ input: 'icon' })
+            icon: z.string().editor({ input: 'icon' }),
+            class: z.string().optional()
           })
         )
       }),
@@ -55,18 +56,6 @@ export const collections = {
             dark: z.string().editor({ input: 'media' })
           }).optional()
         }))
-      }),
-      pricing: createBaseSchema().extend({
-        plans: z.array(
-          createBaseSchema().extend({
-            price: z.string().nonempty(),
-            button: createLinkSchema(),
-            features: z.array(z.string().nonempty()),
-            highlight: z.boolean().optional(),
-            billing_period: z.string().nonempty(),
-            billing_cycle: z.string().nonempty()
-          })
-        )
       }),
       testimonials: createBaseSchema().extend({
         items: z.array(
@@ -84,9 +73,7 @@ export const collections = {
             })
           }))
       }),
-      cta: createBaseSchema().extend({
-        links: z.array(createLinkSchema())
-      })
+      contact: createBaseSchema()
     })
   })
 }
