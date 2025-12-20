@@ -13,27 +13,28 @@ const isDark = computed({
   }
 })
 
-const items = computed(() => [{
-  label: 'Features',
-  to: '#features',
-  active: activeHeadings.value.includes('features') && !activeHeadings.value.includes('about')
-}, {
-  label: 'About',
-  to: '#about',
-  active: activeHeadings.value.includes('about') && !activeHeadings.value.includes('testimonials')
-}, {
-  label: 'Testimonials',
-  to: '#testimonials',
-  active: activeHeadings.value.includes('testimonials') && activeHeadings.value.includes('contact')
-}, {
-  label: 'Contact',
-  to: '#contact',
-  active: activeHeadings.value.includes('contact') && !activeHeadings.value.includes('testimonials')
-}])
+const items = computed(() => [
+  {
+    label: 'About',
+    to: '#about',
+    active: activeHeadings.value.includes('about') && !activeHeadings.value.includes('testimonials')
+  }, {
+    label: 'Products',
+    to: '#products',
+    active: activeHeadings.value.includes('products') && !activeHeadings.value.includes('about')
+  }, {
+    label: 'Testimonials',
+    to: '#testimonials',
+    active: activeHeadings.value.includes('testimonials') && activeHeadings.value.includes('contact')
+  }, {
+    label: 'Contact',
+    to: '#contact',
+    active: activeHeadings.value.includes('contact') && !activeHeadings.value.includes('testimonials')
+  }])
 
 nuxtApp.hooks.hookOnce('page:finish', () => {
   updateHeadings([
-    document.querySelector('#features'),
+    document.querySelector('#products'),
     document.querySelector('#about'),
     document.querySelector('#testimonials'),
     document.querySelector('#contact')

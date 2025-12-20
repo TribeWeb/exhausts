@@ -53,7 +53,7 @@ useSeoMeta({
       orientation="horizontal"
       :ui="{
         container: 'lg:px-0 2xl:px-20 mx-0 max-w-none md:mr-10',
-        features: 'gap-0'
+        features: 'gap-1'
       }"
       reverse
     >
@@ -78,7 +78,7 @@ useSeoMeta({
     <USeparator :ui="{ border: 'border-primary/30' }" />
 
     <UPageSection
-      id="features"
+      id="products"
       :description="page.features.description"
       :features="page.features.features"
       :ui="{
