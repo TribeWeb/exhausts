@@ -4,7 +4,7 @@ contact:
   description: Send us a few details and we'll get back to you with a quote as soon as possible.
 description: Custom made TIG welded stainless steel exhaust systems. Designed for performance, crafted for impact.
 features:
-  title: Product
+  title: "[DeMarco]{.text-primary} products & services"
   description: Choose the level of performance, sound & look that works for you
   features:
     - title: Stainless steel exhaust fabrication
@@ -42,7 +42,7 @@ hero:
       target: ""
       size: xl
     - label: More
-      to: "#features"
+      to: "#about"
       icon: i-lucide-arrow-down
       size: xl
       trailing: true
@@ -50,17 +50,17 @@ hero:
       variant: subtle
 section:
   title: Choose [DeMarco]{.text-primary} exhausts
-  description: How we bring your drive alive
+  description: ""
   images:
-    mobile: /images/tailpipes.svg
-    desktop: /images/tailpipes.svg
+    mobile: /images/tailpipes-mobile.jpeg
+    desktop: /images/tailpipes.jpeg
   features:
     - title: Tailored solutions for any vehicle
       description: With a truly massive array of tailpipe choice and the largest stock of silencers in Europe, Powerflow Exhausts can tailor the sound level to your requirement - we offer a detailed, comprehensive stainless steel exhaust solution at a fantastic price.
       class: border-l border-primary pl-4
       icon: ""
     - title: Same day, while you wait service
-      description: Powerflow Exhausts can build the exhaust right onto your car and offer a same day, while you wait service on most vehicless.
+      description: Powerflow Exhausts can build the exhaust right onto your car and offer a same day, while you wait service on most vehicles.
       class: border-l border-default pt-4 pl-4
     - title: Lifetime guarantee
       description: As a Powerflow Exhausts specialist, most exhaust craftsmanship is covered by Powerflow Exhausts's industry-leading lifetime guarantee. The network boasts specialist equipment unavailable to non-affiliated exhaust fabricators.
@@ -78,19 +78,19 @@ steps:
     - title: Discuss your requirements with our designer
       description: We'll go through all the options to understand how your new exhaust system should look, sound and feel
       image:
-        light: /images/light/connect.svg
-        dark: /images/dark/connect.svg
+        light: /images/light/system.jpeg
+        dark: /images/dark/system.jpeg
     - title: Leave your car with our technicians
       description: Our workshop is located in Bournville, in the heart of England
       image:
-        light: /images/light/optimize.svg
-        dark: /images/dark/optimize.svg
+        light: /images/light/welding.jpeg
+        dark: /images/dark/welding.jpeg
       icon: ""
     - title: Drive away the same day
       description: Most work is carried out in one day. Full systems may take up to 3 days
       image:
-        light: /images/light/track.svg
-        dark: /images/dark/track.svg
+        light: /images/light/tailpipes.jpeg
+        dark: /images/dark/tailpipes.jpeg
 testimonials:
   title: Join our list of [delighted]{.text-primary} customers
   description: See how our customers have transformed their car for the ultimate driving experience
