@@ -4,16 +4,16 @@ contact:
   description: Send us a few details and we'll get back to you with a quote as soon as possible.
 description: Custom made TIG welded stainless steel exhaust systems. Designed for performance, crafted for impact.
 features:
-  title: Get the [sound & look]{.text-primary} you want
-  description: Our products and services include
+  title: Product
+  description: Choose the level of performance, sound & look that works for you
   features:
     - title: Stainless steel exhaust fabrication
-      description: From a full system, cat-back exhaust, back box replacement or anything inbetween
+      description: From a full system, to a simple back box replacement, or anything in-between
       icon: i-lucide-settings
       ui:
         leading: bg-accented/50 p-2 rounded-md border border-muted border-dashed
-    - title: Custom exhaust solutions
-      description: Built directly onto the vehicle for a perfect fit every time
+    - title: Exhausts tailored to your car
+      description: We build directly onto the vehicle for a perfect fit every time
       icon: i-lucide-wand-sparkles
       ui:
         leading: bg-accented/50 p-2 rounded-md border border-muted border-dashed
@@ -22,12 +22,16 @@ features:
       icon: i-lucide-wrench
       ui:
         leading: bg-accented/50 p-2 rounded-md border border-muted border-dashed
-    - title: Exhaust customisation
-      description: Limitless options with Europe's largest range of tailpipes
+    - title: Customise and accessorise your exhaust
+      description: Limitless options with Europe's largest range of tailpipes and silencers
       icon: i-lucide-flask-round
+      ui:
+        leading: bg-accented/50 p-2 rounded-md border border-muted border-dashed
     - title: Electronic exhausts
       description: Various solutions offered for quiet hybrids and electric cars!
       icon: i-lucide-audio-waveform
+      ui:
+        leading: bg-accented/50 p-2 rounded-md border border-muted border-dashed
 hero:
   links:
     - label: Get a quote
@@ -41,7 +45,7 @@ hero:
       to: "#features"
       icon: i-lucide-arrow-down
       size: xl
-      trailing: "true"
+      trailing: true
       color: neutral
       variant: subtle
 section:
@@ -71,13 +75,13 @@ steps:
   title: Transform your driving experience in [3 steps]{.text-primary}
   description: Every installation we carry out is customised to your exact specification and requirements
   items:
-    - title: Talk with our exhaust system designer
+    - title: Discuss your requirements with our designer
       description: We'll go through all the options to understand how your new exhaust system should look, sound and feel
       image:
         light: /images/light/connect.svg
         dark: /images/dark/connect.svg
     - title: Leave your car with our technicians
-      description: At our workshop in Bournville, in the heart of England
+      description: Our workshop is located in Bournville, in the heart of England
       image:
         light: /images/light/optimize.svg
         dark: /images/dark/optimize.svg
@@ -91,24 +95,24 @@ testimonials:
   title: Join our list of [delighted]{.text-primary} customers
   description: See how our customers have transformed their car for the ultimate driving experience
   items:
-    - quote: Since using this tool, my productivity has doubled. The AI insights helped me find my perfect coding rhythm and now I ship features twice as fast.
+    - quote: I had a full stainless steel exhaust system fitted to my Audi S3. The team were fantastic from start to finish, helping me choose the right sound and look for my car. The workmanship is top notch and the car sounds amazing. Highly recommended!
       user:
         name: Sarah Moriceau
         description: Brand Designer
         target: _blank
         avatar:
           src: https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/SarahM19
-    - quote: Game-changer for our team. The focus tracking and smart alerts helped us reduce meeting interruptions by 40% and increased our sprint velocity.
+    - quote: DeMarco Exhausts did an amazing job on my BMW M3's exhaust system. The sound is perfect, and the quality of the work is outstanding. The team was professional and friendly throughout the process. I couldn't be happier with the result!
       user:
-        name: Sébastien Chopin
-        description: Lead Software Engineer
+        name: James O'Connor
+        description: Software Engineer
         target: _blank
         avatar:
-          src: https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/atinux
-    - quote: Finally, a productivity tool that understands developers. The AI features helped me identify my peak coding hours and now I accomplish more in less time.
+          src: https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/jamesoconnor
+    - quote: I recently had a custom exhaust system installed on my Ford Mustang by DeMarco Exhausts, and I am beyond impressed. The attention to detail and craftsmanship is second to none. The car sounds incredible, and I've received so many compliments on the look. Thank you, DeMarco Exhausts!
       user:
-        name: Benjamin Canac
-        description: Senior Frontend Developer
+        name: Emily Zhang
+        description: Marketing Manager
         target: _blank
         avatar:
-          src: https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/benjamincanac
+          src: https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/emilyzhang

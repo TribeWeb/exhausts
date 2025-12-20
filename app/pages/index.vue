@@ -47,6 +47,7 @@ useSeoMeta({
     </UPageHero>
 
     <UPageSection
+      id="about"
       :description="page.section.description"
       :features="page.section.features"
       orientation="horizontal"
@@ -187,7 +188,7 @@ useSeoMeta({
       </UContainer>
     </UPageSection>
 
-    <USeparator />
+    <USeparator :ui="{ border: 'border-primary/30' }" />
     <UPageSection
       id="contact"
       :title="page.contact.title"

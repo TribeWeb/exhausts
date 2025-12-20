@@ -20,15 +20,15 @@ const items = computed(() => [{
 }, {
   label: 'About',
   to: '#about',
-  active: activeHeadings.value.includes('about')
+  active: activeHeadings.value.includes('about') && !activeHeadings.value.includes('testimonials')
 }, {
   label: 'Testimonials',
   to: '#testimonials',
-  active: activeHeadings.value.includes('testimonials') && !activeHeadings.value.includes('about')
+  active: activeHeadings.value.includes('testimonials') && activeHeadings.value.includes('contact')
 }, {
   label: 'Contact',
   to: '#contact',
-  active: activeHeadings.value.includes('contact') && !activeHeadings.value.includes('about')
+  active: activeHeadings.value.includes('contact') && !activeHeadings.value.includes('testimonials')
 }])
 
 nuxtApp.hooks.hookOnce('page:finish', () => {

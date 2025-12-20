@@ -14,7 +14,7 @@ const workRequiredOptions = ref<RadioGroupItem[]>([
     description: 'From the manifold to the tailpipe.'
   },
   {
-    label: 'Back-Box Only',
+    label: 'Backbox Only',
     value: 'backBoxOnly',
     description: 'Replacement or upgrade of the rear silencer.'
   },

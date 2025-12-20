@@ -12,7 +12,7 @@ const createLinkSchema = () => z.object({
   to: z.string().nonempty(),
   icon: z.string().optional().editor({ input: 'icon' }),
   size: createEnum(['xs', 'sm', 'md', 'lg', 'xl']),
-  trailing: z.boolean().optional(),
+  trailing: z.coerce.boolean().optional(),
   target: createEnum(['_blank', '_self']),
   color: createEnum(['primary', 'secondary', 'neutral', 'error', 'warning', 'success', 'info']),
   variant: createEnum(['solid', 'outline', 'subtle', 'soft', 'ghost', 'link'])
