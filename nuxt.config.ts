@@ -22,8 +22,10 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    dvlaApiKeyTest: '',
-    dvlaApiKeyProd: '' // Default to an empty string, automatically set at runtime using process.env.NUXT_API_KEY
+    motApiKey: '',
+    motApiClientId: '',
+    motApiClientSecret: '',
+    motApiTokenUrl: ''
   },
 
   compatibilityDate: '2025-01-15',

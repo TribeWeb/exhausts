@@ -2,6 +2,8 @@
 import * as z from 'zod/v4'
 import type { RadioGroupItem } from '@nuxt/ui'
 
+// const { data: bearer } = await useAsyncData('bearer', () => $fetch('/api/bearer'))
+
 const workRequiredOptions = ref<RadioGroupItem[]>([
   {
     label: 'Cat → Back',
@@ -48,8 +50,7 @@ const schema = z.object({
   registration: z.string().optional(),
   postcode: z.string().optional(),
   workRequired: z.enum(['catBack', 'maniBack', 'backBoxOnly', 'tailpipesOnly', 'fullSystem', 'fullSystemWithRemap', 'other']),
-  notes: z.string().optional(),
-  contactPreference: z.enum(['Email', 'Phone', 'SMS']).optional()
+  notes: z.string().optional()
 })
 
 type Schema = z.output<typeof schema>
@@ -62,18 +63,59 @@ const state = reactive<Partial<Schema>>({
   registration: undefined,
   postcode: undefined,
   workRequired: undefined,
-  notes: undefined,
-  contactPreference: undefined
+  notes: undefined
 })
 
-// const registration = computed(() => state.registration || '')
-// const updatedRegistration = refDebounced(registration, 1000)
+const plate = ref('')
 
-// const plate = computed(() => updatedRegistration.value.toString().toUpperCase().replace(/\s+/g, ''))
+function sanitisePlate(rawPlate: string | undefined) {
+  if (!rawPlate || rawPlate.length < 2) {
+    return
+  }
+  plate.value = rawPlate.toString().toUpperCase().replace(/\s+/g, '')
+}
+
+watchDebounced(
+  state,
+  () => { sanitisePlate(state.registration) },
+  { debounce: 500, maxWait: 1000 }
+)
 
 // const { data, status, error, refresh, clear } = await useFetch(() => `/api/dvla/${plate.value}`, {
 //   pick: ['make', 'monthOfFirstRegistration', 'yearOfManufacture', 'engineCapacity', 'fuelType']
 // })
+
+interface VehicleData {
+  make: string
+  model: string
+  registrationDate: string
+  engineSize: string
+  fuelType: string
+  primaryColour: string
+}
+
+const { data, status } = await useFetch<VehicleData>(() => `/api/${plate.value}`, {
+  pick: ['make', 'model', 'registrationDate', 'engineSize', 'fuelType', 'primaryColour'],
+  transform: (data) => {
+    // Transform DVLA response to match expected fields
+    return {
+      make: data.make,
+      model: data.model,
+      registrationDate: `${useDateFormat(data.registrationDate, 'MMM').value} '${useDateFormat(data.registrationDate, 'YY').value}`,
+      engineSize: data.engineSize === undefined ? ' --- cc' : `${data.engineSize}cc`,
+      fuelType: data.fuelType,
+      primaryColour: data.primaryColour
+    }
+  }
+})
+
+watchEffect(() => {
+  if (data.value) {
+    const { make, model, registrationDate, engineSize, fuelType, primaryColour } = data.value
+
+    state.makeModel = `${make} ${model} ${registrationDate} ${fuelType} ${engineSize} ${primaryColour}`
+  }
+})
 
 const toast = useToast()
 async function onSubmit() {
@@ -94,142 +136,130 @@ async function onSubmit() {
 </script>
 
 <template>
-  <!-- <pre>{{ plate }}</pre> -->
-  <!-- <pre>{{ data }}</pre> -->
-  <UForm
-    id="exhaustContact"
-    :schema="schema"
-    :state="state"
-    data-netlify="true"
-    data-netlify-honeypot="bot-field"
-    @submit.prevent="onSubmit"
-  >
-    <input
-      type="hidden"
-      name="form-name"
-      value="exhaustContact"
+  <div>
+    <!-- <pre>{{ bearer }}</pre> -->
+
+    <UForm
+      id="exhaustContact"
+      :schema="schema"
+      :state="state"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      @submit.prevent="onSubmit"
     >
-    <UPageColumns>
-      <UFormField
-        label="Name"
-        name="name"
+      <input
+        type="hidden"
+        name="form-name"
+        value="exhaustContact"
       >
-        <UInput
-          v-model="state.name"
-          variant="subtle"
-          color="primary"
-          class="w-full"
-        />
-      </UFormField>
+      <UPageColumns>
+        <UFormField
+          label="Name"
+          name="name"
+        >
+          <UInput
+            v-model="state.name"
+            variant="subtle"
+            color="primary"
+            class="w-full"
+          />
+        </UFormField>
 
-      <UFormField
-        label="Email"
-        name="email"
-      >
-        <UInput
-          v-model="state.email"
-          variant="subtle"
-          color="primary"
-          class="w-full"
-        />
-      </UFormField>
+        <UFormField
+          label="Email"
+          name="email"
+        >
+          <UInput
+            v-model="state.email"
+            variant="subtle"
+            color="primary"
+            class="w-full"
+          />
+        </UFormField>
 
-      <UFormField
-        label="Telephone number"
-        name="telephone"
-      >
-        <UInput
-          v-model="state.telephone"
-          variant="subtle"
-          color="primary"
-          class="w-full"
-        />
-      </UFormField>
+        <UFormField
+          label="Telephone number"
+          name="telephone"
+        >
+          <UInput
+            v-model="state.telephone"
+            variant="subtle"
+            color="primary"
+            class="w-full"
+          />
+        </UFormField>
 
-      <UFormField
-        label="Car make & model"
-        name="makeModel"
-      >
-        <UInput
-          v-model="state.makeModel"
-          variant="subtle"
-          color="primary"
-          class="w-full"
-        />
-      </UFormField>
+        <UFormField
+          label="Car registration"
+          name="registration"
+        >
+          <UInput
+            v-model="state.registration"
+            variant="subtle"
+            color="primary"
+            class="w-full"
+          />
+        </UFormField>
 
-      <UFormField
-        label="Car registration"
-        name="registration"
-      >
-        <UInput
-          v-model="state.registration"
-          variant="subtle"
-          color="primary"
-          class="w-full"
-        />
-      </UFormField>
+        <UFormField
+          label="Car make & model"
+          name="makeModel"
+        >
+          <UInput
+            v-model="state.makeModel"
+            variant="subtle"
+            color="primary"
+            class="w-full"
+            :loading="status === 'pending'"
+          />
+        </UFormField>
 
-      <UFormField
-        label="Postcode"
-        name="postcode"
-      >
-        <UInput
-          v-model="state.postcode"
-          variant="subtle"
-          color="primary"
-          class="w-full"
-        />
-      </UFormField>
+        <UFormField
+          label="Postcode"
+          name="postcode"
+        >
+          <UInput
+            v-model="state.postcode"
+            variant="subtle"
+            color="primary"
+            class="w-full"
+          />
+        </UFormField>
 
-      <UFormField
-        label="Work required"
-        name="workRequired"
-      >
-        <URadioGroup
-          v-model="state.workRequired"
-          variant="table"
-          :items="workRequiredOptions"
-          color="primary"
-          class="w-full"
-        />
-      </UFormField>
+        <UFormField
+          label="Work required"
+          name="workRequired"
+        >
+          <URadioGroup
+            v-model="state.workRequired"
+            variant="table"
+            :items="workRequiredOptions"
+            color="primary"
+            class="w-full"
+          />
+        </UFormField>
 
-      <UFormField
-        label="Preferred contact method"
-        name="contactPreference"
-        variant="subtle"
-        color="primary"
-        class="w-full"
-      >
-        <URadioGroup
-          v-model="state.contactPreference"
-          variant="table"
-          :items="['Email', 'Phone', 'SMS']"
-          color="primary"
-        />
-      </UFormField>
+        <UFormField
+          label="Additional notes"
+          name="notes"
+        >
+          <UTextarea
+            v-model="state.notes"
+            :rows="4"
+            placeholder="Your message or extra notes"
+            variant="subtle"
+            color="primary"
+            class="w-full"
+          />
+        </UFormField>
 
-      <UFormField
-        label="Additional notes"
-        name="notes"
-      >
-        <UTextarea
-          v-model="state.notes"
-          :rows="4"
-          placeholder="Your message or extra notes"
-          variant="subtle"
+        <UButton
+          type="submit"
           color="primary"
-          class="w-full"
-        />
-      </UFormField>
-
-      <UButton
-        type="submit"
-        color="primary"
-      >
-        Submit
-      </UButton>
-    </UPageColumns>
-  </UForm>
+        >
+          Submit
+        </UButton>
+      </UPageColumns>
+    </UForm>
+  </div>
 </template>
