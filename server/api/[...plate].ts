@@ -1,14 +1,13 @@
 import { z } from 'zod'
 
 const schema = z.string().min(2).max(10).regex(/^[A-Z0-9]+$/i, 'Invalid plate format')
+const apiKey = useRuntimeConfig().motApiKey
 
 export default defineEventHandler(async (event) => {
   const plate = getRouterParam(event, 'plate')
   const validatedPlate = schema.parse(plate)
 
   const bearer = await $fetch('/api/bearer')
-
-  const apiKey = useRuntimeConfig().motApiKey
 
   const response = await $fetch(`https://history.mot.api.gov.uk/v1/trade/vehicles/registration/${validatedPlate}`, {
     method: 'GET',
