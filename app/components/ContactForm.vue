@@ -66,24 +66,20 @@ const state = reactive<Partial<Schema>>({
   notes: undefined
 })
 
-const plate = ref('')
-
-function sanitisePlate(rawPlate: string | undefined) {
-  if (!rawPlate || rawPlate.length < 2) {
-    return
-  }
-  plate.value = rawPlate.toString().toUpperCase().replace(/\s+/g, '')
-}
+const plateFormatted = computed(() => {
+  return state.registration?.toString().toUpperCase().replace(/\s+/g, '') || ''
+})
 
 watchDebounced(
-  state,
-  () => { sanitisePlate(state.registration) },
+  () => state.registration,
+  async () => {
+    if (!plateFormatted.value || plateFormatted.value.length < 2) {
+      return
+    }
+    await execute()
+  },
   { debounce: 500, maxWait: 1000 }
 )
-
-// const { data, status, error, refresh, clear } = await useFetch(() => `/api/dvla/${plate.value}`, {
-//   pick: ['make', 'monthOfFirstRegistration', 'yearOfManufacture', 'engineCapacity', 'fuelType']
-// })
 
 interface VehicleData {
   make: string
@@ -94,8 +90,10 @@ interface VehicleData {
   primaryColour: string
 }
 
-const { data, status } = await useFetch<VehicleData>(() => `/api/${plate.value}`, {
+const { data, status, execute } = await useFetch<VehicleData>(() => `/api/${plateFormatted.value}`, {
   pick: ['make', 'model', 'registrationDate', 'engineSize', 'fuelType', 'primaryColour'],
+  immediate: false,
+  watch: false,
   transform: (data) => {
     // Transform DVLA response to match expected fields
     return {
@@ -112,7 +110,6 @@ const { data, status } = await useFetch<VehicleData>(() => `/api/${plate.value}`
 watchEffect(() => {
   if (data.value) {
     const { make, model, registrationDate, engineSize, fuelType, primaryColour } = data.value
-
     state.makeModel = `${make} ${model} ${registrationDate} ${fuelType} ${engineSize} ${primaryColour}`
   }
 })
@@ -162,6 +159,7 @@ async function onSubmit() {
             variant="subtle"
             color="primary"
             class="w-full"
+            icon=""
           />
         </UFormField>
 
@@ -193,11 +191,19 @@ async function onSubmit() {
           label="Car registration"
           name="registration"
         >
+          <!-- <input
+            v-model="state.registration"
+            class="registration-ui"
+          > -->
           <UInput
             v-model="state.registration"
+            :value="plateFormatted"
             variant="subtle"
             color="primary"
-            class="w-full"
+            class="w-1/2"
+            icon="i-twemoji-flag-for-flag-european-union"
+            :ui="{ base: 'bg-yellow-300 font-bold text-black'
+            }"
           />
         </UFormField>
 
@@ -263,3 +269,44 @@ async function onSubmit() {
     </UForm>
   </div>
 </template>
+
+<style scoped>
+  .registration-ui {
+  background: linear-gradient(to bottom, #f8d038 0%,#f5ca2e 100%);
+  padding: .25em 1em .25em 1.75em;
+  font-weight: bold;
+  font-size: 2em;
+  border-radius: 5px;
+  border: 1px solid #000;
+  box-shadow: 1px 1px 1px #ddd;
+  position: relative;
+  font-family: helvetica, ariel, sans-serif;
+}
+
+.registration-ui:before {
+  content: 'GB';
+  display: block;
+  width: 30px;
+  height: 100%;
+  background: #063298;
+  position: absolute;
+  top: 0;
+  border-radius: 5px 0 0 5px;
+  color: #f8d038;
+  font-size: .5em;
+  line-height: 85px;
+  padding-left: 5px;
+}
+
+.registration-ui:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 7px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 30px;
+  border: 1px dashed #f8d038;
+}
+</style>
