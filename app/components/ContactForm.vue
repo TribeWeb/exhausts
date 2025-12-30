@@ -191,20 +191,28 @@ async function onSubmit() {
           label="Car registration"
           name="registration"
         >
-          <!-- <input
-            v-model="state.registration"
-            class="registration-ui"
-          > -->
           <UInput
             v-model="state.registration"
             :value="plateFormatted"
             variant="subtle"
             color="primary"
-            class="w-1/2"
-            icon="i-twemoji-flag-for-flag-european-union"
-            :ui="{ base: 'bg-yellow-300 font-bold text-black'
+            class="w-2/5"
+            :ui="{ base: 'bg-yellow-300 font-bold text-black',
+                   leading: 'ps-0'
             }"
-          />
+          >
+            <template #leading>
+              <div
+                class="flex flex-col items-center justify-center h-full p-1  text-yellow-300 font-bold rounded-l-sm"
+                :class="data?.fuelType === 'Electric' ? 'bg-green-600' : 'bg-blue-800'"
+              >
+                <UIcon
+                  name="i-flag-gb-4x3"
+                />
+                <span class="text-[0.6rem]">GB</span>
+              </div>
+            </template>
+          </UInput>
         </UFormField>
 
         <UFormField
@@ -270,7 +278,7 @@ async function onSubmit() {
   </div>
 </template>
 
-<style scoped>
+<!-- <style scoped>
   .registration-ui {
   background: linear-gradient(to bottom, #f8d038 0%,#f5ca2e 100%);
   padding: .25em 1em .25em 1.75em;
@@ -309,4 +317,4 @@ async function onSubmit() {
   border-radius: 30px;
   border: 1px dashed #f8d038;
 }
-</style>
+</style> -->
