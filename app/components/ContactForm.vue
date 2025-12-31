@@ -78,7 +78,7 @@ watchDebounced(
     }
     await execute()
   },
-  { debounce: 500, maxWait: 1000 }
+  { debounce: 1000, maxWait: 2000 }
 )
 
 interface VehicleData {
@@ -90,7 +90,7 @@ interface VehicleData {
   primaryColour: string
 }
 
-const { data, status, execute } = await useFetch<VehicleData>(() => `/api/${plateFormatted.value}`, {
+const { data, status, execute, error, clear } = await useFetch<VehicleData>(() => `/api/${plateFormatted.value}`, {
   pick: ['make', 'model', 'registrationDate', 'engineSize', 'fuelType', 'primaryColour'],
   immediate: false,
   watch: false,
@@ -111,6 +111,17 @@ watchEffect(() => {
   if (data.value) {
     const { make, model, registrationDate, engineSize, fuelType, primaryColour } = data.value
     state.makeModel = `${make} ${model} ${registrationDate} ${fuelType} ${engineSize} ${primaryColour}`
+  } else {
+    state.makeModel = undefined
+  }
+  if (error.value) {
+    clear()
+  }
+})
+
+watch(() => state.registration, (newValue) => {
+  if (newValue === undefined || newValue.length < 2) {
+    clear()
   }
 })
 
@@ -134,8 +145,6 @@ async function onSubmit() {
 
 <template>
   <div>
-    <!-- <pre>{{ bearer }}</pre> -->
-
     <UForm
       id="exhaustContact"
       :schema="schema"
@@ -156,6 +165,7 @@ async function onSubmit() {
         >
           <UInput
             v-model="state.name"
+            placeholder="Full name"
             variant="subtle"
             color="primary"
             class="w-full"
@@ -169,6 +179,7 @@ async function onSubmit() {
         >
           <UInput
             v-model="state.email"
+            placeholder="Email address"
             variant="subtle"
             color="primary"
             class="w-full"
@@ -181,6 +192,7 @@ async function onSubmit() {
         >
           <UInput
             v-model="state.telephone"
+            placeholder="Mobile or landline number"
             variant="subtle"
             color="primary"
             class="w-full"
@@ -194,6 +206,7 @@ async function onSubmit() {
           <UInput
             v-model="state.registration"
             :value="plateFormatted"
+            placeholder="UK Registration"
             variant="subtle"
             color="primary"
             class="w-2/5"
@@ -203,13 +216,13 @@ async function onSubmit() {
           >
             <template #leading>
               <div
-                class="flex flex-col items-center justify-center h-full p-1  text-yellow-300 font-bold rounded-l-sm"
+                class="flex flex-col items-center justify-center h-full pt-1 px-1 text-yellow-300 font-bold rounded-l-sm"
                 :class="data?.fuelType === 'Electric' ? 'bg-green-600' : 'bg-blue-800'"
               >
                 <UIcon
                   name="i-flag-gb-4x3"
                 />
-                <span class="text-[0.6rem]">GB</span>
+                <span class="text-[0.7rem]">UK</span>
               </div>
             </template>
           </UInput>
@@ -234,6 +247,7 @@ async function onSubmit() {
         >
           <UInput
             v-model="state.postcode"
+            placeholder="Full UK postcode"
             variant="subtle"
             color="primary"
             class="w-full"
@@ -260,7 +274,7 @@ async function onSubmit() {
           <UTextarea
             v-model="state.notes"
             :rows="4"
-            placeholder="Your message or extra notes"
+            placeholder="Your message or extra information"
             variant="subtle"
             color="primary"
             class="w-full"
