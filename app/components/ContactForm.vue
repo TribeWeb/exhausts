@@ -165,6 +165,7 @@ async function onSubmit() {
         >
           <UInput
             v-model="state.name"
+            size="xl"
             placeholder="Full name"
             variant="subtle"
             color="primary"
@@ -179,6 +180,7 @@ async function onSubmit() {
         >
           <UInput
             v-model="state.email"
+            size="xl"
             placeholder="Email address"
             variant="subtle"
             color="primary"
@@ -192,6 +194,7 @@ async function onSubmit() {
         >
           <UInput
             v-model="state.telephone"
+            size="xl"
             placeholder="Mobile or landline number"
             variant="subtle"
             color="primary"
@@ -206,10 +209,11 @@ async function onSubmit() {
           <UInput
             v-model="state.registration"
             :value="plateFormatted"
-            placeholder="UK Registration"
+            size="xl"
+            placeholder="UK registration"
             variant="subtle"
             color="primary"
-            class="w-2/5"
+            class="w-1/2"
             :ui="{ base: 'bg-yellow-300 font-bold text-black',
                    leading: 'ps-0'
             }"
@@ -234,6 +238,7 @@ async function onSubmit() {
         >
           <UInput
             v-model="state.makeModel"
+            size="xl"
             variant="subtle"
             color="primary"
             class="w-full"
@@ -247,6 +252,7 @@ async function onSubmit() {
         >
           <UInput
             v-model="state.postcode"
+            size="xl"
             placeholder="Full UK postcode"
             variant="subtle"
             color="primary"
@@ -260,6 +266,7 @@ async function onSubmit() {
         >
           <URadioGroup
             v-model="state.workRequired"
+            size="md"
             variant="table"
             :items="workRequiredOptions"
             color="primary"
@@ -273,6 +280,7 @@ async function onSubmit() {
         >
           <UTextarea
             v-model="state.notes"
+            size="xl"
             :rows="4"
             placeholder="Your message or extra information"
             variant="subtle"
