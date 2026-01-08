@@ -12,22 +12,22 @@
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.82",
-    "@iconify-json/simple-icons": "^1.2.63",
+    "@iconify-json/simple-icons": "^1.2.65",
     "@nuxt/content": "^3.10.0",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.3.0",
     "@vueuse/nuxt": "14.1.0",
     "better-sqlite3": "^12.5.0",
     "nuxt": "^4.2.2",
-    "nuxt-studio": "1.0.0-beta.0",
+    "nuxt-studio": "1.0.0",
     "vue": "^3.5.26"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.12.1",
-    "baseline-browser-mapping": "^2.9.11",
+    "baseline-browser-mapping": "^2.9.12",
     "eslint": "^9.39.2",
     "typescript": "^5.9.3",
-    "vue-tsc": "^3.2.1"
+    "vue-tsc": "^3.2.2"
   },
   "packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6"
 }
