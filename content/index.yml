@@ -56,11 +56,11 @@ section:
     desktop: /images/tailpipes.jpeg
   features:
     - title: Tailored solutions for any vehicle
-      description: With a truly massive array of tailpipe choice and the largest stock of silencers in Europe, Powerflow Exhausts can tailor the sound level to your requirement - we offer a detailed, comprehensive stainless steel exhaust solution at a fantastic price.
+      description: "With a truly massive array of tailpipe choice and the largest stock of silencers in Europe, here at DeMarco's, using Powerflow Exhausts we can tailor the sound level to your requirement - we offer a bespoke, comprehensive stainless steel exhaust solution at a fantastic price. "
       class: border-l border-primary pl-4
       icon: ""
     - title: Same day, while you wait service
-      description: Powerflow Exhausts can build the exhaust right onto your car and offer a same day, while you wait service on most vehicles.
+      description: At DeMarco's we can build you a Powerflow Exhaust right onto your car and offer a same day, while you wait service on most vehicles.
       class: border-l border-default pt-4 pl-4
     - title: Lifetime guarantee
       description: As a Powerflow Exhausts specialist, most exhaust craftsmanship is covered by Powerflow Exhausts's industry-leading lifetime guarantee. The network boasts specialist equipment unavailable to non-affiliated exhaust fabricators.
@@ -95,24 +95,24 @@ testimonials:
   title: Join our list of [delighted]{.text-primary} customers
   description: See how our customers have transformed their car for the ultimate driving experience
   items:
-    - quote: I had a full stainless steel exhaust system fitted to my Audi S3. The team were fantastic from start to finish, helping me choose the right sound and look for my car. The workmanship is top notch and the car sounds amazing. Highly recommended!
+    - quote: Robin is a great guy, really genuine and cares about what he does. He did a cat back exhaust on my SLK350. Top quality welding and stainless steel used and just a top quality job done overall. He gave me tonnes of info regarding different options based on what I was looking for, he always got back to me quickly, did the job in the time he estimated and I would highly recommend him personally.  Thanks again Robin. My SLK comes to you forever from here on out.
       user:
-        name: Sarah Moriceau
-        description: Brand Designer
+        name: Joshua Fortune
+        description: Mercedes SLK
         target: _blank
         avatar:
-          src: https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/SarahM19
-    - quote: DeMarco Exhausts did an amazing job on my BMW M3's exhaust system. The sound is perfect, and the quality of the work is outstanding. The team was professional and friendly throughout the process. I couldn't be happier with the result!
+          src: ""
+    - quote: Robin is a lovely lad who takes massive pride in his work. Beautiful welding and premium stainless steel materials. Left my car sounding exactly how I requested and couldn’t be happier 😁
       user:
-        name: James O'Connor
-        description: Software Engineer
+        name: Jake Sims
+        description: BMW M5
         target: _blank
         avatar:
-          src: https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/jamesoconnor
-    - quote: I recently had a custom exhaust system installed on my Ford Mustang by DeMarco Exhausts, and I am beyond impressed. The attention to detail and craftsmanship is second to none. The car sounds incredible, and I've received so many compliments on the look. Thank you, DeMarco Exhausts!
+          src: ""
+    - quote: Great find. They did a great job fitting a stainless steel exhaust to my old Mercedes Estate. The job was done on time and too budget. They also took time to show me the work that was undertaken and check I was happy. I think my old Merc’s might be going a bit more often!
       user:
-        name: Emily Zhang
-        description: Marketing Manager
+        name: Mark Browne
+        description: Mercedes
         target: _blank
         avatar:
-          src: https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/emilyzhang
+          src: ""
